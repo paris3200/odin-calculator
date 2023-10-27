@@ -27,3 +27,31 @@ function operate(operator, n1, n2) {
 
   return 'Error: operator unknown';
 }
+
+const display = document.querySelector('#display');
+
+let displayValue = '0';
+display.textContent = displayValue;
+
+function updateDisplay(input) {
+  if (displayValue === '0' && input !== 'Clear') {
+    displayValue = input;
+  } else if (input === 'Clear') {
+    displayValue = '0';
+  } else {
+    displayValue += input;
+  }
+  display.textContent = displayValue;
+}
+
+const btnClear = document.querySelector('#btn-clear');
+btnClear.addEventListener('click', () => {
+  updateDisplay('Clear');
+});
+
+const buttons = document.querySelectorAll('.btn');
+buttons.forEach((button) => {
+  button.addEventListener('click', (e) => {
+    updateDisplay(e.target.textContent);
+  });
+});
