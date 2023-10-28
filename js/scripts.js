@@ -42,32 +42,33 @@ function processDisplay(display) {
     n1 = parseFloat(display.slice(0, index));
     n2 = parseFloat(display.slice(index + 1));
     result = operate(operator, n1, n2);
-  }
-
-  if (display.includes('-')) {
+  } else if (display.includes('-')) {
     operator = 'subtract';
     const index = display.indexOf('-');
     n1 = parseFloat(display.slice(0, index));
     n2 = parseFloat(display.slice(index + 1));
     result = operate(operator, n1, n2);
-  }
-
-  if (display.includes('x')) {
+  } else if (display.includes('x')) {
     operator = 'multiply';
     const index = display.indexOf('x');
     n1 = parseFloat(display.slice(0, index));
     n2 = parseFloat(display.slice(index + 1));
     result = operate(operator, n1, n2);
-  }
-
-  if (display.includes('/')) {
+  } else if (display.includes('/')) {
     operator = 'divide';
     const index = display.indexOf('/');
     n1 = parseFloat(display.slice(0, index));
     n2 = parseFloat(display.slice(index + 1));
-    result = operate(operator, n1, n2);
+    if (n2 === 0) {
+      result = 'ERROR';
+    } else {
+      result = operate(operator, n1, n2);
+    }
+  } else {
+    result = 'ERROR';
   }
-  return result;
+
+  return result.toString().slice(0, 13);
 }
 
 const display = document.querySelector('#display');
